@@ -1382,3 +1382,4 @@
 .venv/share/python-wheels/urllib3-1.24.1-py2.py3-none-any.whl
 .venv/share/python-wheels/webencodings-0.5.1-py2.py3-none-any.whl
 .venv/share/python-wheels/wheel-0.32.3-py2.py3-none-any.whl
+.vscode/settings.json
