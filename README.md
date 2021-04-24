@@ -13,7 +13,21 @@ On the Raspberry Pi an external ADC is required. Libraries for ads1115 and mcp30
 * Raspberry Pi
 * NTC B 3950 5% 10k Thermistor
 
+R1 = 10k resistor (measured 10040 ohms)  
+Vcc = RPi voltage (measured 3.3 V)  
+R2 = NTC 10k Thermistor  
+Vr2 = measured voltage (A0)  
+From voltage divider equation  
+R2=Vr2*R1/(Vcc-Vr2)  
+
+/ADCmqtt_ntcThermistor.py (converts temp to C inside python)  
+/demoMQTT.py (outputs raw A0 voltage. Temp conversion done inside node red)
+
 ![thermistor](images/falstad.gif#5rad)
+![thermistor](images/nodered.png#5rad)
+![thermistor](images/RPI-ADS1115-Thermistor-Breadboard.png#5rad)
+![thermistor](images/RPI-ADS1115-Thermistor-Pin-Diagram.png#5rad)
+![thermistor](images/RPI-ADS1115-Thermistor-Graph.png#5rad)
 
 ![thermistor](images/thermistor.png#5rad)
 ​
