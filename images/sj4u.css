@@ -1,0 +1,97 @@
+img[src*="banner"] {
+   width:100%;
+   height:auto;
+}
+
+img[src*="left"] {
+  float: left;
+}
+
+img[src*="right"] {
+  float: right;
+}
+
+img[src*="100sq"] {
+  width: 100px;
+  height: 100px;
+}
+
+img[src*="125sq"] {
+  width: 125px;
+  height: 125px;
+}
+
+img[src*="150sq"] {
+  width: 150px;
+  height: 150px;
+}
+
+img[src*="200sq"] {
+  width: 200px;
+  height: 200px;
+}
+
+img[src*="250sq"] {
+  width: 250px;
+  height: 250px;
+}
+
+img[src*="100x"] {
+  width: 100px;
+}
+
+img[src*="200x"] {
+  width: 200px;
+}
+
+img[src*="250x"] {
+  width: 250px;
+}
+
+img[src*="300x"] {
+  width: 300px;
+}
+
+img[src*="400x"] {
+  width: 400px;
+}
+
+img[src*="500x"] {
+  width: 500px;
+}
+
+img[src*="100y"] {
+  height: 100px;
+}
+
+img[src*="125y"] {
+  height: 125px;
+}
+
+img[src*="150y"] {
+  height: 150px;
+}
+
+img[src*="200y"] {
+  height: 200px;
+}
+
+img[src*="300y"] {
+  height: 300px;
+}
+
+img[src*="5rad"] {
+  border-radius: 5%;
+}
+
+img[src*="50rad"] {
+  border-radius: 50%;
+}
+
+img[src*="sh"] {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+

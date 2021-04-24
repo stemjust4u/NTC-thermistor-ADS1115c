@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
-''' MCP3008 adc has 8 channels.  If any channel has a delta (current-previous) that is above the
-noise threshold or if the max Time interval exceeded then the 
-voltage from all channels will be returned.
- When creating object, pass: Number of channels, Vref, noise threshold, and max time interval
+''' 
+MCP3008 adc has 8 channels.  If any channel has a delta (current-previous) that is above the
+ noise threshold or if the max Time interval exceeded then the  voltage from all channels will be returned.
+ When creating object, pass: Number of channels, Vref, noise threshold, max time interval, and CS or CE (chip select)
  Will return a list with the voltage value for each channel
+ Number of channels (1-8)
+ Vref (3.3 or 5V) ** Important on RPi. If using 5V must use a voltage divider on MISO
+ R2=R1(1/(Vin/Vout-1)) Vin=5V, Vout=3.3V, R1=2.4kohm
+ R2=4.7kohm
+ Noise threshold is in raw ADC - To find the noise threshold set initial threshold low and monitor
+ Max time interval is used to catch drift/creep that is below the noise threshold.
+ CS (chip select) - Uses SPI0 with GPIO 8 (CE0) or GPIO 7 (CE1)
 
-To find the noise threshold set noise threshold low and max time interval lowpygame.examples.mask.main()
-Noise is in raw ADC
-
-Max time interval is used to catch drift/creep that is below the noise threshold.
-
-You can enable SPI1 with a dtoverlay configured in "/boot/config.txt"
-dtoverlay=spi1-3cs
+ Requires 4 lines. SCLK, MOSI, MISO, CS
+ You can enable SPI1 with a dtoverlay configured in "/boot/config.txt"
+ dtoverlay=spi1-3cs
+ SPI1 SCLK = GPIO 21
+      MISO = GPIO 19
+      MOSI = GPIO 20
+      CS = GPIO 18(CE0) 17(CE1) 16(CE2)
 
 '''
 import busio, digitalio, board, logging
@@ -26,6 +33,7 @@ class mcp3008:
         ''' Create spi connection and initialize lists '''
         
         self.vref = vref
+        logging.info("MCP3008 using SPI SCLK:GPIO{0} MISO:GPIO{1} MOSI:GPIO{2} CS:GPIO{3}".format(board.SCK, board.MISO, board.MOSI, cs))
         spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI) # create the spi bus
         if cs == 8:
             cs = digitalio.DigitalInOut(board.D8) # create the cs (chip select). Use GPIO8 (CE0) or GPIO7 (CE1)
@@ -34,7 +42,7 @@ class mcp3008:
         else:
             logging.info("Chip Select pin must be 7 or 8")
             exit()
-        mcp = MCP.MCP3008(spi, cs) # create the mcp object
+        mcp = MCP.MCP3008(spi, cs) # create the mcp object. Can pass Vref as last argument
         self.numOfChannels = numOfChannels
         self.chan = [AnalogIn(mcp, MCP.P0), # create analog input channel on pins
                      AnalogIn(mcp, MCP.P1),
@@ -87,7 +95,7 @@ class mcp3008:
       
 if __name__ == "__main__":
   
-    adc = mcp3008(2, 5, 400, 1) # numOfChannels, vref, noiseThreshold
+    adc = mcp3008(2, 5, 400, 1, 8) # numOfChannels, vref, noiseThreshold, max time interval, chip select
     outgoingD = {}
     while True:
         voltage = adc.getValue()

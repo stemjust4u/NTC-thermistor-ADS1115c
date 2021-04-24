@@ -1,8 +1,10 @@
 Adafruit-Blinka==5.9.1
 adafruit-circuitpython-ads1x15==2.2.4
 adafruit-circuitpython-busdevice==5.0.1
+adafruit-circuitpython-mcp3xxx==1.4.2
 Adafruit-PlatformDetect==2.23.0
 Adafruit-PureIO==1.1.8
+paho-mqtt==1.5.1
 pkg-resources==0.0.0
 pyftdi==0.52.0
 pyserial==3.5
